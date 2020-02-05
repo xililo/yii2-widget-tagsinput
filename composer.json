@@ -1,0 +1,36 @@
+{
+    "name": "rbshubham/yii2-widget-tagsinput",
+    "description": "A Yii2 wrapper widget for the Bootstrap Tags Input.",
+    "keywords": [
+      "yii2",
+      "extension",
+      "widget",
+      "form",
+      "tagsinput",
+      "input",
+      "tags",
+      "bootstrap",
+      "jquery",
+      "plugin"
+    ],
+    "homepage": "https://github.com/rbshubham/yii2-widget-tagsinput",
+    "type": "yii2-extension",
+    "authors": [
+      {
+        "name": "Shubham Garg",
+        "email": "shubham.garg@redblink.net",
+        "homepage": "https://redblink.com/"
+      }
+    ],
+    "license": "proprietary",
+    "require": {
+      
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+      "psr-4": {
+        "rbshubham\\tagsinput\\": ""
+      }
+    }
+  }
+  
