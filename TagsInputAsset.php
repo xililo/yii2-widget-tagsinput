@@ -23,8 +23,8 @@ class TagsInputAsset extends \yii\web\AssetBundle
         $srcFiles = [];
         $minFiles = [];
         foreach ($files as $file) {
-            $srcFiles[] = "{$file}.{$type}";
-            $minFiles[] = "{$file}.min.{$type}";
+            $srcFiles[] = "{$type}/{$file}.{$type}";
+            $minFiles[] = "{$type}/{$file}.min.{$type}";
         }
         if (empty($this->$type)) {
             $this->$type = YII_DEBUG ? $srcFiles : $minFiles;
