@@ -26,7 +26,6 @@
     "require": {
       
     },
-    "minimum-stability": "stable",
     "autoload": {
       "psr-4": {
         "rbshubham\\tagsinput\\": ""
