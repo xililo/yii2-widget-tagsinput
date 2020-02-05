@@ -5,13 +5,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 To install, either run
 
 ```
-$ php composer.phar require 
+$ php composer.phar require rbshubham/yii2-widget-tagsinput
 ```
 
 or add
 
 ```
-
+"rbshubham/yii2-widget-tagsinput": "*"
 ```
 
 to the ```require``` section of your `composer.json` file.
