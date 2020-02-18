@@ -23,13 +23,23 @@ to the ```require``` section of your `composer.json` file.
 use shubham\tagsinput\TagsInput;
 
 // Usage with ActiveForm and model
-echo $form->field($model, 'status')->widget(TagsInput::classname(), [
-    //options
+echo $form->field($model, 'tags')->widget(TagsInput::classname(), [
+    "options"=>[
+        // Input Options Here
+    ],
+    'pluginOptions'=>[
+        // Refer to https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#options
+    ],
+    'pluginEvents'=>[
+        // Refer to https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/
+    ]
 ]);
 
 
 // Without model & without ActiveForm
 echo TagsInput::widget([
-    'name' => 'status_1',
+    'name' => 'tags',
 ]);
 ```
+
+For more details, visit: http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/

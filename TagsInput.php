@@ -22,6 +22,31 @@ class TagsInput extends \yii\widgets\InputWidget
      * The name of the jQuery plugin to use for this widget.
      */
     const PLUGIN_NAME = 'tagsinput';
+    
+    const VALID_PLUGIN_EVENTS = [
+        'itemAddedOnInit',
+        'beforeItemAdd',
+        'itemAdded',
+        'beforeItemRemove',
+        'itemRemoved',
+    ];
+    const VALID_PLUGIN_OPTONS = [
+        'tagClass',
+        'itemValue',
+        'itemText',
+        'maxTags',
+        'maxChars',
+        'trimValue',
+        'allowDuplicates',
+        'focusClass',
+        'freeInput',
+        'typeahead',
+        'cancelConfirmKeysOnEmpty',
+        'onTagExists',
+    ];
+    
+    public $pluginOptions = [];
+    public $pluginEvents = [];
 
     /**
      * @var array the HTML attributes for the input tag.
@@ -29,12 +54,15 @@ class TagsInput extends \yii\widgets\InputWidget
      */
     public $options = [];
     
+
     /**
      * @inheritdoc
      */
     public function run()
     {
+        
         $this->registerClientScript();
+       
         $this->options['data-role']= self::PLUGIN_NAME;
         if ($this->hasModel()) {
             echo Html::activeTextInput($this->model, $this->attribute, $this->options);
@@ -46,12 +74,14 @@ class TagsInput extends \yii\widgets\InputWidget
     public function registerClientScript()
     {
         $view = $this->getView();
+        $options = $this->addPluginOptions();
         
+        $this->addPluginEvents($view);
         $js =  <<< JS
-                
-           var elt = $('#{$this->options['id']}').tagsinput('input');
+           $('#{$this->options['id']}').tagsinput({$options});
+           var \$elt = $('#{$this->options['id']}').tagsinput('input');
            var prevent = false;
-            elt.\$input.focus(function() {
+            \$elt.focus(function() {
                prevent = true;
             }).blur(function() {
                 prevent = false;
@@ -59,8 +89,34 @@ class TagsInput extends \yii\widgets\InputWidget
            $("#{$this->field->form->id}").on('submit', function(){
                 if (prevent){return false;}
            });
+           
+           
 JS;
         $view->registerJs($js, \yii\web\View::POS_END); 
         TagsInputAsset::register($view);
+    }
+    
+    private function addPluginOptions(){
+       
+        foreach ($this->pluginOptions as $key=>$option){
+            if(!in_array($key, self::VALID_PLUGIN_OPTONS)){
+                unset($this->pluginOptions[$key]);
+            }
+        }
+        return  empty($this->pluginOptions) ? '{}' : Json::encode($this->pluginOptions);
+        
+        
+    }
+    private function addPluginEvents($view){
+        $js = '';
+        foreach ($this->pluginEvents as $key=>$value){
+            if(!in_array($key, self::VALID_PLUGIN_EVENTS)){
+                unset($this->pluginEvents[$key]);
+            }else{
+                $js .= "$('#{$this->options['id']}').on('$key',$value);\n";
+            }
+        }
+        $view->registerJs($js, \yii\web\View::POS_END); 
+        
     }
 }
