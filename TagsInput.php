@@ -46,6 +46,12 @@ class TagsInput extends \yii\widgets\InputWidget
     public function registerClientScript()
     {
         $view = $this->getView();
+        $js =  <<< JS
+           $("#{$this->field->form->id}").on('submit', function(){
+                if ($('input:focus').length){return false;}
+           });
+JS;
+        $view->registerJs($js, \yii\web\View::POS_END); 
         TagsInputAsset::register($view);
     }
 }
