@@ -46,9 +46,18 @@ class TagsInput extends \yii\widgets\InputWidget
     public function registerClientScript()
     {
         $view = $this->getView();
+        
         $js =  <<< JS
+                
+           var elt = $('#{$this->options['id']}').tagsinput('input');
+           var prevent = false;
+            elt.\$input.focus(function() {
+               prevent = true;
+            }).blur(function() {
+                prevent = false;
+            });
            $("#{$this->field->form->id}").on('submit', function(){
-                if ($('input:focus').length){return false;}
+                if (prevent){return false;}
            });
 JS;
         $view->registerJs($js, \yii\web\View::POS_END); 
