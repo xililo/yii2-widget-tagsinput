@@ -37,6 +37,8 @@ echo $form->field($model, 'tags')->widget(TagsInput::classname(), [
     ],
     'pluginOptions'=>[
         // Refer to https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#options
+        // Enables clear all tags button
+        'allowClear'=>true; // default true
     ],
     'pluginEvents'=>[
         // Refer to https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/

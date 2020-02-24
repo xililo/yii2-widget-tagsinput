@@ -24,7 +24,7 @@
     ],
     "license": "proprietary",
     "require": {
-      
+      "yiisoft/yii2": "*"
     },
     "minimum-stability": "stable",
     "autoload": {

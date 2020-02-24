@@ -53,3 +53,15 @@
 .bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
+.tagsinput_clear-all {
+  cursor: pointer;
+  float: right;
+  position: absolute;
+  right: .7rem;
+  z-index: 99;
+  opacity: 0.4;
+  color: #000;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

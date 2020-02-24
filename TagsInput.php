@@ -43,9 +43,12 @@ class TagsInput extends \yii\widgets\InputWidget
         'typeahead',
         'cancelConfirmKeysOnEmpty',
         'onTagExists',
+        'allowClear'
     ];
     
-    public $pluginOptions = [];
+    public $pluginOptions = [
+        'allowClear'=>true,
+    ];
     public $pluginEvents = [];
 
     /**
@@ -64,11 +67,24 @@ class TagsInput extends \yii\widgets\InputWidget
         $this->registerClientScript();
        
         $this->options['data-role']= self::PLUGIN_NAME;
+        echo "<div class='col-md-12 p-0'>";
         if ($this->hasModel()) {
+            if($this->pluginOptions['allowClear']){
+                
+                echo Html::tag('span', 'x',['class'=>'tagsinput_clear-all','id'=>$this->options['id'].'-remove-all']);
+                
+            }
             echo Html::activeTextInput($this->model, $this->attribute, $this->options);
+            
+            
         } else {
+            if($this->pluginOptions['allowClear']){
+                echo Html::tag('span', '<i class="fa fa-trash" aria-hidden="true"></i>',['class'=>'tagsinput_clear-all','id'=>$this->options['id'].'-remove-all']);
+            }
             echo Html::textInput($this->name, $this->value, $this->options);
+            
         }
+        echo "</div>";
     }
 
     public function registerClientScript()
@@ -89,6 +105,12 @@ class TagsInput extends \yii\widgets\InputWidget
            $("#{$this->field->form->id}").on('submit', function(){
                 if (prevent){return false;}
            });
+           if($("#{$this->options['id']}-remove-all").length){
+            $("#{$this->options['id']}-remove-all").on('click', function(){
+                 $('#{$this->options['id']}').tagsinput('removeAll');
+            });
+           }
+           
            
            
 JS;
