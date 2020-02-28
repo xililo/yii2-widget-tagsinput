@@ -10,8 +10,10 @@ class TagsInputAsset extends \yii\web\AssetBundle
      * @inheritdoc
      */
     public $depends = [
-        
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
+
 
     /**
      * Set up CSS and JS asset arrays based on the base-file names
