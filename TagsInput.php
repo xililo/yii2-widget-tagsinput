@@ -34,6 +34,7 @@ class TagsInput extends \yii\widgets\InputWidget
         'tagClass',
         'itemValue',
         'itemText',
+        'confirmKeys',
         'maxTags',
         'maxChars',
         'trimValue',
@@ -63,7 +64,7 @@ class TagsInput extends \yii\widgets\InputWidget
      */
     public function run()
     {
-        
+        $this->setPluginOptions();
         $this->registerClientScript();
        
         $this->options['data-role']= self::PLUGIN_NAME;
@@ -140,5 +141,8 @@ JS;
         }
         $view->registerJs($js, \yii\web\View::POS_END); 
         
+    }
+    public function setPluginOptions(){
+        $this->pluginOptions['allowClear'] = $this->pluginOptions['allowClear']??true;
     }
 }
