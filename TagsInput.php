@@ -52,6 +52,8 @@ class TagsInput extends \yii\widgets\InputWidget
     ];
     public $pluginEvents = [];
 
+    public $formID = null;
+
     /**
      * @var array the HTML attributes for the input tag.
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
@@ -80,7 +82,7 @@ class TagsInput extends \yii\widgets\InputWidget
             
         } else {
             if($this->pluginOptions['allowClear']){
-                echo Html::tag('span', '<i class="fa fa-trash" aria-hidden="true"></i>',['class'=>'tagsinput_clear-all','id'=>$this->options['id'].'-remove-all']);
+                echo Html::tag('span', 'x',['class'=>'tagsinput_clear-all','id'=>$this->options['id'].'-remove-all']);
             }
             echo Html::textInput($this->name, $this->value, $this->options);
             
@@ -103,18 +105,20 @@ class TagsInput extends \yii\widgets\InputWidget
             }).blur(function() {
                 prevent = false;
             });
-           $("#{$this->field->form->id}").on('submit', function(){
-                if (prevent){return false;}
-           });
+           
            if($("#{$this->options['id']}-remove-all").length){
             $("#{$this->options['id']}-remove-all").on('click', function(){
                  $('#{$this->options['id']}').tagsinput('removeAll');
             });
            }
            
-           
-           
+          
 JS;
+        if(!empty($this->formID)){
+            $js .= ';$("#'.$this->formID.'").on("beforeValidate" , function(event, messages, deferreds){
+                if (prevent){return false;}
+           });';
+        }
         $view->registerJs($js, \yii\web\View::POS_END); 
         TagsInputAsset::register($view);
     }
@@ -144,5 +148,8 @@ JS;
     }
     public function setPluginOptions(){
         $this->pluginOptions['allowClear'] = $this->pluginOptions['allowClear']??true;
+        if (empty($this->formID) && $this->hasModel()) {
+            $this->formID = $this->field->form->id;
+        }
     }
 }
