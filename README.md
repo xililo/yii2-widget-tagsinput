@@ -5,21 +5,26 @@ Create a Bootstrap Tags Input Box
 
 ---------------------------------
 
+## TODO
+This fork is aimed at making a progressive enhancement to this wigdet. This include but not limited to:
+- Make it support Bootstrap 5 and above
+- Make it compatible with Yii2 and above
+- Make it easy to use and customizable
+- Support multiple input formats (e.g. comma-separated, array)
+
 
 ## Installation
-
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/). Check the [composer.json](https://github.com/kartik-v/yii2-widget-switchinput/blob/master/composer.json) for this extension's requirements and dependencies. Read this [web tip /wiki](http://webtips.krajee.com/setting-composer-minimum-stability-application/) on setting the `minimum-stability` settings for your application's composer.json.
 
 To install, either run
 
 ```
-$ php composer.phar require rbshubham/yii2-widget-tagsinput
+$ php composer.phar require xililo/yii2-widget-tagsinput
 ```
 
 or add
 
 ```
-"rbshubham/yii2-widget-tagsinput": "*"
+"xililo/yii2-widget-tagsinput": "*"
 ```
 
 to the ```require``` section of your `composer.json` file.
@@ -36,12 +41,10 @@ echo $form->field($model, 'tags')->widget(TagsInput::classname(), [
         // Input Options Here
     ],
     'pluginOptions'=>[
-        // Refer to https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#options
-        // Enables clear all tags button
         'allowClear'=>true; // default true
     ],
     'pluginEvents'=>[
-        // Refer to https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/
+       
     ]
 ]);
 
@@ -51,5 +54,3 @@ echo TagsInput::widget([
     'name' => 'tags',
 ]);
 ```
-
-For more details, visit: http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/
